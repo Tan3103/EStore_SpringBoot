@@ -36,6 +36,13 @@ public class HomeController {
 
         if(item != null){
             itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
         }
 
         return "about";
