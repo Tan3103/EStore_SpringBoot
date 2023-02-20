@@ -59,6 +59,30 @@ public class HomeController {
             itemService.updateItem(item);
             itemService.updateItem(item);
             itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
+            itemService.updateItem(item);
         }
 
         return "about";
