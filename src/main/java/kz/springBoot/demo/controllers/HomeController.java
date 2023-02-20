@@ -32,59 +32,6 @@ public class HomeController {
 
     @GetMapping(value = "/about")
     public String about(){
-        ShopItems item = new ShopItems();
-
-        if(item != null){
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-            itemService.updateItem(item);
-        }
-
         return "about";
     }
 
