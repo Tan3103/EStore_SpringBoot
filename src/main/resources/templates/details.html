@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main.html}">
+    <head>
+        <title>Details</title>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="row mt-5">
+                <div class="col-6 offset-3">
+                    <form th:action="@{'/saveitem'}" method="post">
+                        <input type="hidden" name="id" th:value="${item.id}">
+                        <div class="form-group mt-2">
+                            <label th:text="#{label.name}"></label>
+                            <input type="text" class="form-control" name="item_name" th:value="${item!=null?item.name:''}">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label th:text="#{label.price}"></label>
+                            <input type="number" class="form-control" name="item_price" th:value="${item!=null?item.price:'0'}" max="10000000" min="0">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label th:text="#{label.amount}"></label>
+                            <input type="number" class="form-control" name="item_amount" th:value="${item!=null?item.amount:'0'}" max="100000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success mt-2" th:text="#{button.save}"></button>
+                            <button type="button" class="btn btn-danger mt-2 ml-2" data-bs-toggle="modal" data-bs-target="#deleteModal" th:text="#{button.delete}"></button>
+                        </div>
+                    </form>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form th:action="${'/deleteitem'}" method="post">
+                                <input type="hidden" name="id" th:value="${item.id}">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 th:text="#{message.confirm}"></h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{button.cancel}"></button>
+                                        <button class="btn btn-danger" th:text="#{button.delete}"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
