@@ -2,7 +2,9 @@ package kz.springBoot.demo.controllers;
 
 import kz.springBoot.demo.db.DBManager;
 import kz.springBoot.demo.db.Items;
+import kz.springBoot.demo.entities.Countries;
 import kz.springBoot.demo.entities.ShopItems;
+import kz.springBoot.demo.repositories.CountryRepository;
 import kz.springBoot.demo.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class HomeController {
         List<ShopItems> items = itemService.getAllItems();
         model.addAttribute("tovary", items);
 
+        List<Countries> countries = itemService.getAllCountries();
+        model.addAttribute("countries", countries);
+
         return "index";
     }
 
@@ -36,11 +41,23 @@ public class HomeController {
     }
 
     @PostMapping(value = "/additem")
-    public String addItem(@RequestParam(name = "item_name", defaultValue = "No Item") String name,
+    public String addItem(@RequestParam(name = "country_id", defaultValue = "0") Long id,
+                          @RequestParam(name = "item_name", defaultValue = "No Item") String name,
                           @RequestParam(name = "item_price", defaultValue = "0") int price,
                           @RequestParam(name = "item_amount", defaultValue = "0") int amount){
 
-        itemService.addItem(new ShopItems(null, name, price, amount));
+        Countries country = itemService.getCountry(id);
+
+        if(country != null){
+            ShopItems item = new ShopItems();
+
+            item.setName(name);
+            item.setPrice(price);
+            item.setAmount(amount);
+            item.setCountry(country);
+
+            itemService.addItem(item);
+        }
 
         return "redirect:/";
     }
@@ -51,11 +68,15 @@ public class HomeController {
         ShopItems item = itemService.getItem(id);
         model.addAttribute("item", item);
 
+        List<Countries> countries = itemService.getAllCountries();
+        model.addAttribute("countries", countries);
+
         return "details";
     }
 
     @PostMapping(value = "/saveitem")
-    public String saveItem(@RequestParam(name = "id", defaultValue = "0") Long id,
+    public String saveItem(@RequestParam(name = "country_id", defaultValue = "0") Long country_id,
+                           @RequestParam(name = "id", defaultValue = "0") Long id,
                            @RequestParam(name = "item_name", defaultValue = "No Item") String name,
                            @RequestParam(name = "item_price", defaultValue = "0") int price,
                            @RequestParam(name = "item_amount", defaultValue = "0") int amount){
@@ -63,10 +84,16 @@ public class HomeController {
         ShopItems item = itemService.getItem(id);
 
         if(item != null){
-            item.setName(name);
-            item.setPrice(price);
-            item.setAmount(amount);
-            itemService.updateItem(item);
+
+            Countries country = itemService.getCountry(country_id);
+
+            if(country != null){
+                item.setName(name);
+                item.setPrice(price);
+                item.setAmount(amount);
+                item.setCountry(country);
+                itemService.updateItem(item);
+            }
         }
 
         return "redirect:/";
