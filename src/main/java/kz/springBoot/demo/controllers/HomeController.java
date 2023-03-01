@@ -1,10 +1,8 @@
 package kz.springBoot.demo.controllers;
 
-import kz.springBoot.demo.db.DBManager;
-import kz.springBoot.demo.db.Items;
+import kz.springBoot.demo.entities.Categories;
 import kz.springBoot.demo.entities.Countries;
 import kz.springBoot.demo.entities.ShopItems;
-import kz.springBoot.demo.repositories.CountryRepository;
 import kz.springBoot.demo.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +69,9 @@ public class HomeController {
         List<Countries> countries = itemService.getAllCountries();
         model.addAttribute("countries", countries);
 
+        List<Categories> categories = itemService.getAllCategories();
+        model.addAttribute("categories", categories);
+
         return "details";
     }
 
@@ -109,5 +110,27 @@ public class HomeController {
         }
 
         return "redirect:/";
+    }
+
+    @PostMapping(value = "/assigncategory")
+    public String assignCategory(@RequestParam(name = "item_id") Long itemId,
+                                 @RequestParam(name = "category_id") Long categoryId){
+
+        Categories category = itemService.getCategory(categoryId);
+        if(category != null){
+
+            ShopItems item = itemService.getItem(itemId);
+            if(item != null){
+
+                List<Categories> categories = item.getCategories();
+                if(categories == null){
+                    categories = new ArrayList<>();
+                }
+                categories.add(category);
+
+                itemService.updateItem(item);
+            }
+        }
+        return "redirect:/details/" + itemId;
     }
 }

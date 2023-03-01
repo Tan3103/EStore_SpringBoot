@@ -1,5 +1,6 @@
 package kz.springBoot.demo.services;
 
+import kz.springBoot.demo.entities.Categories;
 import kz.springBoot.demo.entities.Countries;
 import kz.springBoot.demo.entities.ShopItems;
 
@@ -18,4 +19,8 @@ public interface ItemService {
     Countries getCountry(Long id);
     Countries updateItem(Countries country);
 
+    List<Categories> getAllCategories();
+    Categories getCategory(Long id);
+    Categories updateCategory(Categories category);
+    Categories addCategory(Categories category);
 }

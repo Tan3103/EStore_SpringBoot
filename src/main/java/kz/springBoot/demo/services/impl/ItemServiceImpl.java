@@ -1,7 +1,9 @@
 package kz.springBoot.demo.services.impl;
 
+import kz.springBoot.demo.entities.Categories;
 import kz.springBoot.demo.entities.Countries;
 import kz.springBoot.demo.entities.ShopItems;
+import kz.springBoot.demo.repositories.CategoryRepository;
 import kz.springBoot.demo.repositories.CountryRepository;
 import kz.springBoot.demo.repositories.ItemRepository;
 import kz.springBoot.demo.services.ItemService;
@@ -18,6 +20,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private CountryRepository countryRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public ShopItems addItem(ShopItems items) {
@@ -63,4 +68,26 @@ public class ItemServiceImpl implements ItemService {
     public Countries updateItem(Countries country) {
         return countryRepository.save(country);
     }
+
+    @Override
+    public List<Categories> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Categories getCategory(Long id) {
+        return categoryRepository.getOne(id);
+    }
+
+    @Override
+    public Categories updateCategory(Categories category) {
+        return categoryRepository.save(category);
+    }
+
+    @Override
+    public Categories addCategory(Categories category) {
+        return categoryRepository.save(category);
+    }
+
+
 }
